@@ -5,7 +5,7 @@
           <v-col cols="12" md="4" v-for="(item, index) in 5"  :key="index">
             <UserCardsProductCard
               name="car"
-              image="/assets/imgs/hero/avatar.png"
+              image="~/assets/imgs/hero/avatar.png"
             />
           </v-col>
           </v-row>

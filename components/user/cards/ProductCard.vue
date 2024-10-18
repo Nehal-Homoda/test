@@ -1,12 +1,28 @@
 <template>
-    <v-card color="deep-orange-lighten-3" variant="outlined" class="d-flex flex-column justify-center align-center"  rounded="large">
-     <v-img width="30" height="30" :src="image"></v-img>
-     <p class="text-black">{{ name }}</p>
-    </v-card>
+  <v-card
+    class="px-3 py-4"
+    color="deep-orange-lighten-3"
+    variant="outlined"
+    rounded="large"
+  >
+    <div class=" d-flex justify-end ">
+      <v-icon @click="isLiked = !isLiked"  :color="!isLiked ? 'red' : 'grey'"
+        >mdi mdi-thumb-up</v-icon
+      >
+    </div>
+    <div class="d-flex flex-column justify-center align-center">
+      <div>
+        <v-img width="90" height="90" :src="images.avatar"></v-img>
+      </div>
+      <p class="text-black">{{ name }}</p>
+    </div>
+  </v-card>
 </template>
 <script setup lang="ts">
-const props=defineProps(['image','name'])
+const props = defineProps(["image", "name"]);
+const isLiked=ref(false)
 
+import { images } from "~/core/manager/RoutesManager";
 </script>
 
 

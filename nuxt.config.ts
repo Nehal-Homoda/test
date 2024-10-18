@@ -20,13 +20,13 @@ export default defineNuxtConfig({
     },
     //...
   ],
-  vite: {
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
-    },
-  },
+  // vite: {
+  //   vue: {
+  //     template: {
+  //       // transformAssetUrls,
+  //     },
+  //   },
+  // },
 })
 
 

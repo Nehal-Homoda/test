@@ -5,7 +5,7 @@
         <v-col cols="12" md="4" v-for="(item, index) in 5" :key="index">
           <UserCardsProductCard
             name="car"
-            image="/assets/imgs/hero/cardimg.png"
+            :image="images.avatar"
           />
         </v-col>
       </v-row>
@@ -13,6 +13,7 @@
   </v-sheet>
 </template>
 <script setup lang="ts">
+import { images } from '~/core/manager/RoutesManager';
 </script>
 
 
