@@ -1,0 +1,45 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Smartphone",
+        "description": "Latest model smartphone with high-resolution display.",
+        "price": 699.99,
+        "category": "Electronics",
+        "stock": 120,
+        "rating": 4.8,
+        "imageUrl": "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      },
+      {
+        "id": 2,
+        "name": "Laptop",
+        "description": "Lightweight laptop with powerful performance.",
+        "price": 999.99,
+        "category": "Electronics",
+        "stock": 80,
+        "rating": 4.6,
+        "imageUrl": "https://images.pexels.com/photos/1181672/pexels-photo-1181672.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      },
+      {
+        "id": 3,
+        "name": "Fitness Tracker",
+        "description": "Monitor your health and fitness with this smart tracker.",
+        "price": 49.99,
+        "category": "Fitness",
+        "stock": 200,
+        "rating": 4.5,
+        "imageUrl": "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      },
+      {
+        "id": 4,
+        "name": "Wireless Charger",
+        "description": "Fast wireless charging pad for all Qi-enabled devices.",
+        "price": 25.99,
+        "category": "Accessories",
+        "stock": 150,
+        "rating": 4.7,
+        "imageUrl": "https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+      }
+    ]
+  }
+  
