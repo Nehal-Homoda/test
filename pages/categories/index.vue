@@ -13,7 +13,7 @@
   </v-sheet>
 </template>
 <script setup lang="ts">
-import { images } from '~/core/manager/RoutesManager';
+import { images } from '~/core/manager/AssetssManager';
 </script>
 
 

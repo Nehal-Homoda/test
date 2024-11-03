@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar>
+        <v-app-bar elevation="0">
             <v-btn @click="login" rounded="lg" variant="outlined" elevation="0" color="deep-orange-lighten-3" >
                 login
             </v-btn>
@@ -32,10 +32,13 @@
 </template>
 
 <script setup lang="ts">
+import  { userLogin} from '~/core/manager/RoutesManager'; 
 const isLoggedIn=ref(false)
 const snackbar=ref(false)
 const timeout=ref(2000)
+const router=useRouter()
 const login=()=>{
+    router.push(userLogin)
     isLoggedIn.value=true
     snackbar.value=true
 }

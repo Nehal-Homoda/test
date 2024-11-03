@@ -21,7 +21,7 @@ const emits=defineEmits(['handleLike'])
 const isLiked=ref(false)
 // const isLiked = ref(false)
 
-import { images } from "~/core/manager/RoutesManager";
+import { images } from "~/core/manager/AssetssManager";
 const handleLikeProduct=()=>{
   isLiked.value=!isLiked.value
   
