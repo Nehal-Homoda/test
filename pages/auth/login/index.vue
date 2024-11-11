@@ -6,20 +6,19 @@
                     <div class="login-form">
                         <v-form ref="loginFormRef" class="" @submit.prevent="onSubmit"
                             :class="{ 'shake-form': isNotValid }">
-                            <input autocomplete="on" type="email" class=" dummy-input" id="email">
-                            <input autocomplete="on" type="password" class="dummy-input">
+                            <!-- <input autocomplete="on" type="email" class=" dummy-input" id="email">
+                            <input autocomplete="on" type="password" class="dummy-input"> -->
                             <v-card rounded="lg" variant="outlined" color="deep-orange-lighten-3" class="px-10 py-13">
                                 <v-row>
                                     <v-col cols="12" md="7" class="mx-auto">
 
                                         <label for="email"></label>
-                                        <v-text-field autocomplete="off" v-model="loginForm.email"
-                                            :rules="[validationRules.required]" variant="outlined" type="email"
-                                            id="email"></v-text-field>
+                                        <v-text-field v-model="loginForm.email" :rules="[validationRules.required]"
+                                            variant="outlined" type="email" id="email"></v-text-field>
                                         <label for="password"></label>
-                                        <v-text-field autocomplete="off" v-model="loginForm.password"
-                                            :rules="[validationRules.required]" variant="outlined"
-                                            color="deep-orange-lighten-3" type="password" id="password"></v-text-field>
+                                        <v-text-field v-model="loginForm.password" :rules="[validationRules.required]"
+                                            variant="outlined" color="deep-orange-lighten-3" type="password"
+                                            id="password"></v-text-field>
                                         <div class="d-flex justify-center">
 
                                         </div>
@@ -36,7 +35,7 @@
                     </div>
                 </v-col>
             </v-row>
-            <v-sheet class="py-16" width="100%">
+            <!-- <v-sheet class="py-16" width="100%">
                 <div class="d-flex justify-center ga-5">
                     <v-card class="animateOpacity mb-10" width="150" height="150" color="error"
                         :class="{ 'changeOpacity': isStarted }">
@@ -70,7 +69,7 @@
                 <div class=" d-flex justify-center">
                     <v-btn @click="startAnimation" class="">start</v-btn>
                 </div>
-            </v-sheet>
+            </v-sheet> -->
         </v-container>
     </v-sheet>
 
@@ -79,27 +78,24 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth';
 
-const loginForm = {
+// const isStarted = ref(false)
+// const startAnimation = () => {
+//     isStarted.value = !isStarted.value
+// }
+const loginForm = ref({
     email: '',
     password: ''
-}
-const isStarted = ref(false)
-const startAnimation = () => {
-    isStarted.value = !isStarted.value
-}
-// const email = ref('nehalhomoda00@gmail.com')
-// const password = ref('12345');
+})
 const loginFormRef = ref(null)
 const isNotValid = ref(false)
-// const isLoggedIn = ref(false)
 const authStore = useAuthStore()
+const router = useRouter()
 const { isLoggedIn, user } = storeToRefs(authStore)
+const { login } = useAuthStore()
 const validationRules = {
     required: (v: any) => !!v || 'required',
-
 }
 const onSubmit = async () => {
-
     if (!loginFormRef.value) return
     //@ts-ignore
     const { valid } = await loginFormRef.value.validate()
@@ -113,10 +109,10 @@ const onSubmit = async () => {
         return
     }
     isNotValid.value = false
-    // if (user.value.email == loginForm.email && user.value.password == loginForm.password) {
-    //     isLoggedIn.value = true
-    // }
-
+    login(loginForm.value.email, loginForm.value.password)
+    if (isLoggedIn.value == true) {
+        router.push('/')
+    }
 }
 </script>
 
