@@ -1,7 +1,15 @@
-export const userLogin='/auth/login'
-export const home='/'
-export const shop='/shop'
-export const pages='/pages'
-export const blog='/blog'
-export const contact='/contact'
+const userLogin='/auth/login'
+const home='/'
+const shop='/shop'
+const pages='/pages'
+const blog='/blog'
+const contact='/contact'
+export default {
+    userLogin,
+    home,
+    shop,
+    pages,
+    blog,
+    contact
+}
 

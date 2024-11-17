@@ -10,7 +10,7 @@ export default defineNuxtConfig({
  
 
 
-
+css:['~/assets/sass/main.scss'],
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
