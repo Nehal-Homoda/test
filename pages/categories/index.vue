@@ -22,7 +22,7 @@ import { images } from '~/core/manager/AssetssManager';
   grid-template-columns: repeat(4,1fr);
   grid-gap: 15px 15px;
 
-  @media (max-width:1200px) {
+  @media (max-width:1200px) { 
     grid-template-columns: repeat(3,1fr) ;
 
   }

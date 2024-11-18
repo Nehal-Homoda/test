@@ -1,20 +1,20 @@
-<template>
-  <div class="nav-drop-down">
+<!-- <template>
+  <div class="nav-drop-down"> -->
     <!-- BUTTON -->
-    <div  ref="btnElement" class="">
+    <!-- <div  ref="btnElement" class="">
       <NuxtLink @mouseenter="showMenu = true" class="link text-body-1 btn-wrap">
         <v-icon> mdi mdi-chevron-down </v-icon>
         hhh
       </NuxtLink>
-    </div>
+    </div> -->
     <!-- MENU -->
-    <div v-if="showMenu" ref="menuElement" class="nav-drop-down-menu">
+    <!-- <div v-if="showMenu" ref="menuElement" class="nav-drop-down-menu">
       <slot name="menu"></slot>
     </div>
   </div>
-</template>
+</template> -->
 
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 
 const btnElement = ref(null);
 const menuElement = ref(null);
@@ -41,9 +41,9 @@ onBeforeUnmount(() => {
 })
 
 
-</script>
+</script> -->
 
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 .nav-drop-down {
   position: relative;
   // overflow: visible;
@@ -68,4 +68,4 @@ onBeforeUnmount(() => {
 
   }
 }
-</style>
+</style> -->

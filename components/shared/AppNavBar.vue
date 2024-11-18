@@ -5,6 +5,9 @@
             login
           </v-btn> -->
       <div class="nav-bar">
+        <v-btn @click="handleOpenDrawer" icon="" variant="text" density="compact" elevation="0" class="d-md-none d-block">
+          <v-icon size="30">mdi mdi-menu</v-icon>
+        </v-btn>
         <div class="logo">
           <v-img width="120" height="120" :src="images.logo"></v-img>
         </div>
@@ -22,7 +25,7 @@
             </Transition>
             <Transition name="slideUp">
               <div class="items full-width-menu px-16" v-if="index == 2">
-               
+
                 <v-container>
 
                   <v-row>
@@ -38,7 +41,7 @@
                     </v-col>
                   </v-row>
                 </v-container>
-               
+
               </div>
             </Transition>
             <Transition name="slideUp">
@@ -59,13 +62,25 @@
             </Transition>
           </NuxtLink>
         </div>
+        <div class="icons-wrap d-flex ga-md-5">
+          <button>
+            <v-icon>mdi mdi-account</v-icon>
+          </button>
+          <v-btn icon="" density="compact" variant="text">
+            <v-icon>mdi mdi-magnify</v-icon>
+          </v-btn>
+          <v-btn class="d-md-block d-none" icon="" density="compact" variant="text">
+            <v-icon>mdi mdi-heart-outline</v-icon>
+          </v-btn>
+          <v-btn icon="" density="compact" variant="text">
+            <v-icon>mdi mdi-shopping-outline</v-icon>
+          </v-btn>
+
+        </div>
       </div>
 
     </v-container>
   </v-sheet>
-
-
-
   <template>
     <div class="text-center">
       <v-snackbar v-model="snackbar" :timeout="timeout">
@@ -89,18 +104,22 @@ const snackbar = ref(false)
 const timeout = ref(2000)
 const router = useRouter()
 const login = () => {
-  router.push(userLogin)
+  router.push(RoutesManager.userLogin)
   isLoggedIn.value = true
   snackbar.value = true
+}
+const emits=defineEmits(['open-drawer'])
+const handleOpenDrawer=()=>{
+emits('open-drawer')
 }
 
 
 const links = ref({
-  1: { name: 'home', link: home ,items:[{name:'',link:''}],categories:[]},
-  2: { name: 'shop', link: shop ,items:[{name:'',link:''}],categories:[{name:'',link:'',items:[{name:'',link:''}]}]},
-  3: { name: 'pages', link: pages ,items:[{name:'',link:''}],categories:[]},
-  4: { name: 'blog', link: blog ,items:[{name:'',link:''}],categories:[]},
-  5: { name: 'Contact us', link: contact ,items:[] ,categories:[]}
+  1: { name: 'home', link: RoutesManager.home, items: [{ name: '', link: '' }], categories: [] },
+  2: { name: 'shop', link: RoutesManager.shop, items: [], categories: [{ name: '', link: '', items: [{ name: '', link: '' }] }] },
+  3: { name: 'pages', link: RoutesManager.pages, items: [{ name: '', link: '' }], categories: [] },
+  4: { name: 'blog', link: RoutesManager.blog, items: [{ name: '', link: '' }], categories: [] },
+  5: { name: 'Contact us', link: RoutesManager.contact, items: [], categories: [] }
 })
 
 
@@ -109,7 +128,7 @@ const links = ref({
 <style scoped lang="scss">
 .nav-bar {
   display: grid;
-  grid-template-columns: 1fr 10fr 1fr;
+  grid-template-columns: 1fr 8fr 1fr;
   place-items: center;
   // align-items: center;
 
@@ -185,10 +204,17 @@ const links = ref({
       }
 
     }
+    @media (max-width:1000px) {
+      display: none;
+      
+    }
   }
 
   .icons-wrap {
     justify-self: end;
+    // display: flex;
+    // gap: 0.8em;
+
   }
 }
 
