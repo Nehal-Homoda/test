@@ -5,7 +5,8 @@
             login
           </v-btn> -->
       <div class="nav-bar">
-        <v-btn @click="handleOpenDrawer" icon="" variant="text" density="compact" elevation="0" class="d-md-none d-block">
+        <v-btn @click="handleOpenDrawer" icon="" variant="text" density="compact" elevation="0"
+          class="d-md-none d-block">
           <v-icon size="30">mdi mdi-menu</v-icon>
         </v-btn>
         <div class="logo">
@@ -15,51 +16,32 @@
           <NuxtLink class="link text-body-1 " v-for="(item, index) in links" :class="{ 'full-width-menu': index == 2 }"
             :to="item.link">{{ item.name }}
             <v-icon v-if="index != 5"> mdi mdi-chevron-down </v-icon>
+
+            <!-- menu items -->
             <Transition name="slideUp">
-              <div class="items" v-if="index == 1">
-                <span>Home v1 — Modern Elegance</span>
-                <span>Home v2 — Rustic Comfort</span>
-                <span>Home v3 — Minimalist Chic</span>
-                <span>Home v4 — Industrial Vibes</span>
+              <div class="items" v-if="item.items.length">
+                <NuxtLink v-for="(valueItem, i) in item.items">{{ valueItem.name }}</NuxtLink>
               </div>
             </Transition>
+
+            <!-- menu categories -->
             <Transition name="slideUp">
-              <div class="items full-width-menu px-16" v-if="index == 2">
-
+              <div class="items full-width-menu px-16" v-if="item.categories.length">
                 <v-container>
-
                   <v-row>
-                    <v-col cols="12" md="3" v-for="item in 4">
+                    <v-col cols="12" md="3" v-for="(category, i) in item.categories">
                       <div class="d-flex flex-column text-subtitle-1">
-                        <h4>Shop pages </h4>
-                        <span>Shop — Left Sidebar </span>
-                        <span>Shop — Right Sidebar</span>
-                        <span>Shop — Fullwidth</span>
-                        <span>Shop — No Sidebar</span>
-                        <span>Shop — Masonry</span>
+                        <NuxtLink>{{ category.name }}</NuxtLink>
+                      </div>
+                      <div class="d-flex flex-column text-subtitle-1">
+                        <NuxtLink v-for="item in category.items">{{ item.name }}</NuxtLink>
                       </div>
                     </v-col>
                   </v-row>
                 </v-container>
+              </div>
+            </Transition>
 
-              </div>
-            </Transition>
-            <Transition name="slideUp">
-              <div class="items" v-if="index == 3">
-                <span>Home v1 — Modern Elegance</span>
-                <span>Home v2 — Rustic Comfort</span>
-                <span>Home v3 — Minimalist Chic</span>
-                <span>Home v4 — Industrial Vibes</span>
-              </div>
-            </Transition>
-            <Transition name="slideUp">
-              <div class="items" v-if="index == 4">
-                <span>Home v1 — Modern Elegance</span>
-                <span>Home v2 — Rustic Comfort</span>
-                <span>Home v3 — Minimalist Chic</span>
-                <span>Home v4 — Industrial Vibes</span>
-              </div>
-            </Transition>
           </NuxtLink>
         </div>
         <div class="icons-wrap d-flex ga-md-5">
@@ -108,19 +90,112 @@ const login = () => {
   isLoggedIn.value = true
   snackbar.value = true
 }
-const emits=defineEmits(['open-drawer'])
-const handleOpenDrawer=()=>{
-emits('open-drawer')
+const emits = defineEmits(['open-drawer'])
+const handleOpenDrawer = () => {
+  emits('open-drawer')
 }
 
 
+// const links = ref({
+//   1: { name: 'home', link: RoutesManager.home, items: [{ name: '', link: '' }], categories: [] },
+//   2: { name: 'shop', link: RoutesManager.shop, items: [], categories: [{ name: '', link: '', items: [{ name: '', link: '' }] }] },
+//   3: { name: 'pages', link: RoutesManager.pages, items: [{ name: '', link: '' }], categories: [] },
+//   4: { name: 'blog', link: RoutesManager.blog, items: [{ name: '', link: '' }], categories: [] },
+//   5: { name: 'Contact us', link: RoutesManager.contact, items: [], categories: [] }
+// })
+
+
 const links = ref({
-  1: { name: 'home', link: RoutesManager.home, items: [{ name: '', link: '' }], categories: [] },
-  2: { name: 'shop', link: RoutesManager.shop, items: [], categories: [{ name: '', link: '', items: [{ name: '', link: '' }] }] },
-  3: { name: 'pages', link: RoutesManager.pages, items: [{ name: '', link: '' }], categories: [] },
-  4: { name: 'blog', link: RoutesManager.blog, items: [{ name: '', link: '' }], categories: [] },
-  5: { name: 'Contact us', link: RoutesManager.contact, items: [], categories: [] }
-})
+  1: {
+    name: 'home',
+    link: RoutesManager.home,
+    items: [
+      { name: 'About Us', link: RoutesManager.about },
+      { name: 'Our Services', link: RoutesManager.services },
+      { name: 'Testimonials', link: RoutesManager.testimonials },
+      { name: 'FAQ', link: RoutesManager.faq }
+    ],
+    categories: []
+  },
+
+  2: {
+    name: 'shop',
+    link: RoutesManager.shop,
+    items: [], // Keeping empty as requested
+    categories: [
+      {
+        name: 'Electronics',
+        link: RoutesManager.shopElectronics,
+        items: [
+          { name: 'Smartphones', link: RoutesManager.smartphones },
+          { name: 'Laptops', link: RoutesManager.laptops },
+          { name: 'Headphones', link: RoutesManager.headphones }
+        ]
+      },
+      {
+        name: 'Clothing',
+        link: RoutesManager.shopClothing,
+        items: [
+          { name: 'Men', link: RoutesManager.menClothing },
+          { name: 'Women', link: RoutesManager.womenClothing },
+          { name: 'Kids', link: RoutesManager.kidsClothing }
+        ]
+      },
+      {
+        name: 'Home & Kitchen',
+        link: RoutesManager.shopHomeKitchen,
+        items: [
+          { name: 'Furniture', link: RoutesManager.furniture },
+          { name: 'Appliances', link: RoutesManager.appliances },
+          { name: 'Decor', link: RoutesManager.decor }
+        ]
+      },
+      {
+        name: 'Home & Kitchen',
+        link: RoutesManager.shopHomeKitchen,
+        items: [
+          { name: 'Furniture', link: RoutesManager.furniture },
+          { name: 'Appliances', link: RoutesManager.appliances },
+          { name: 'Decor', link: RoutesManager.decor }
+        ]
+      }
+    ]
+  },
+
+  3: {
+    name: 'pages',
+    link: RoutesManager.pages,
+    items: [
+      { name: 'Terms of Service', link: RoutesManager.termsOfService },
+      { name: 'Privacy Policy', link: RoutesManager.privacyPolicy },
+      { name: 'Cookie Policy', link: RoutesManager.cookiePolicy }
+    ],
+    categories: []
+  },
+
+  4: {
+    name: 'blog',
+    link: RoutesManager.blog,
+    items: [
+      { name: 'Latest Posts', link: RoutesManager.latestPosts },
+      { name: 'Categories', link: RoutesManager.blogCategories },
+      { name: 'Popular Posts', link: RoutesManager.popularPosts }
+    ],
+    categories: []
+  },
+
+  5: {
+    name: 'Contact us',
+    link: RoutesManager.contact,
+    items: [
+      { name: 'Email Us', link: RoutesManager.emailUs },
+      { name: 'Call Us', link: RoutesManager.callUs },
+      { name: 'Locate Us', link: RoutesManager.locateUs }
+    ],
+    categories: []
+  }
+});
+
 
 
 </script>
@@ -204,9 +279,10 @@ const links = ref({
       }
 
     }
+
     @media (max-width:1000px) {
       display: none;
-      
+
     }
   }
 
