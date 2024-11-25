@@ -45,7 +45,7 @@
           </NuxtLink>
         </div>
         <div class="icons-wrap d-flex ga-md-5">
-          <button>
+          <button @click="showLoginForm = true">
             <v-icon>mdi mdi-account</v-icon>
           </button>
           <v-btn icon="" density="compact" variant="text">
@@ -59,40 +59,41 @@
           </v-btn>
 
         </div>
+
+
       </div>
+      <Transition name="slideRight">
+        <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" class="" />
+      </Transition>
+
+     
+
 
     </v-container>
   </v-sheet>
-  <template>
-    <div class="text-center">
-      <v-snackbar v-model="snackbar" :timeout="timeout">
-        Thank You,You are logged in
-
-        <template v-slot:actions>
-          <v-btn color="blue" variant="text" @click="snackbar = false">
-            Close
-          </v-btn>
-        </template>
-      </v-snackbar>
-    </div>
-  </template>
+ 
 </template>
 
 <script setup lang="ts">
 import { images } from '~/core/manager/AssetssManager';
 import RoutesManager from '~/core/manager/RoutesManager';
 const isLoggedIn = ref(false)
-const snackbar = ref(false)
-const timeout = ref(2000)
+
+
 const router = useRouter()
-const login = () => {
-  router.push(RoutesManager.userLogin)
-  isLoggedIn.value = true
-  snackbar.value = true
-}
+const showLoginForm = ref(false)
+
+// const login = () => {
+//   router.push(RoutesManager.userLogin)
+//   isLoggedIn.value = true
+// }
+
 const emits = defineEmits(['open-drawer'])
 const handleOpenDrawer = () => {
   emits('open-drawer')
+}
+const closeForm = () => {
+  showLoginForm.value = false
 }
 
 

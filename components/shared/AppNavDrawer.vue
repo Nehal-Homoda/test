@@ -20,7 +20,7 @@
                     </div>
                 </template>
             </div>
-           
+
 
             <div class="items-link" v-if="selectedCategory">
                 <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
@@ -32,8 +32,7 @@
                     <v-divider></v-divider>
                 </div>
                 <template v-for="(item, index) in selectedCategory.categories">
-                    <NuxtLink @click="handleSelectedItem(item)"
-                        class="link py-3 px-6 d-flex justify-space-between ">
+                    <NuxtLink @click="handleSelectedItem(item)" class="link py-3 px-6 d-flex justify-space-between ">
                         {{ item.name }}
                         <v-icon>mdi mdi-chevron-right</v-icon>
                     </NuxtLink>
@@ -44,24 +43,24 @@
             </div>
             <div class="items-link" v-if="selectedItem">
 
-<NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
-        mdi-chevron-left</v-icon> {{
-            selectedItem.name }}
-</NuxtLink>
+                <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
+                        mdi-chevron-left</v-icon> {{
+                            selectedItem.name }}
+                </NuxtLink>
 
-<div class="px-6">
-    <v-divider></v-divider>
-</div>
-<template v-for="(item, index) in selectedItem.items">
-    <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
-        }}
+                <div class="px-6">
+                    <v-divider></v-divider>
+                </div>
+                <template v-for="(item, index) in selectedItem.items">
+                    <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
+                        }}
 
-    </NuxtLink>
-    <div class="px-6">
-        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
-    </div>
-</template>
-</div>
+                    </NuxtLink>
+                    <div class="px-6">
+                        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                    </div>
+                </template>
+            </div>
 
 
             <!-- <div class="items-link" v-if="selectedCategoryItem">
@@ -231,8 +230,8 @@ const handleSelectedCategoryItem = (categoryItem: any) => {
 }
 const hideItems = () => {
     selectedItem.value = null
-    selectedCategoryItem.value=null
-    selectedCategory.value=null
+    selectedCategoryItem.value = null
+    selectedCategory.value = null
 }
 
 

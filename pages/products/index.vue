@@ -3,30 +3,24 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="3" v-for="(item, index) in products" :key="index">
-          <UserCardsProductCard
-            @handle-like="changeNumber($event)"
-            :name="item.name"
-            :image="item.imageUrl"
-          />
+          <UserCardsProductCard @handle-like="changeNumber($event)" :name="item.name" :image="item.imageUrl" />
         </v-col>
       </v-row>
 
       <v-dialog v-model="dialog" max-width="500">
-        <template v-slot:default="{ isActive }"> 
-          <v-card  rounded="lg" class="d-flex align-center justify-center  py-2" >
+        <template v-slot:default="{ isActive }">
+          <v-card rounded="lg" class="d-flex align-center justify-center  py-2">
             <v-card-text> number of liked products is {{ likedCount }} </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn
-                text="Close"
-                @click="isActive.value = false"
-              ></v-btn>
+              <v-btn text="Close" @click="isActive.value = false"></v-btn>
             </v-card-actions>
           </v-card>
         </template>
       </v-dialog>
+
     </v-container>
   </v-sheet>
 </template>
