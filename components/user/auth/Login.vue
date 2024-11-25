@@ -13,7 +13,8 @@
                 type="email" id="email"></v-text-field>
             <v-text-field v-model="loginForm.password" variant="outlined" placeholder="password"
                 type="password"></v-text-field>
-            <v-btn type="submit" color="black" class="login-btn">Log in</v-btn>
+            <v-btn type="submit" class="login-btn">
+                <span>Log in</span></v-btn>
         </v-form>
         <div class="text-center">
             <v-snackbar v-model="snackbar" :timeout="timeout">
@@ -80,13 +81,33 @@ const onSubmit = async () => {
 
     .login-btn {
         width: 100%;
+        background-color: black;
+        animation: backgroundfade 2s ease-in-out;
+
+        span {
+            color: white;
+        }
+
     }
 
     .close-btn {
+
         &:hover {
             transform: rotate(90deg);
         }
+
     }
 
+}
+
+@keyframes backgroundfade {
+    0% {
+        background-color: gold;
+
+    }
+
+    100% {
+        background-color: #000;
+    }
 }
 </style>
