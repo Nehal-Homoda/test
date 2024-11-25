@@ -15,9 +15,6 @@
                 type="password"></v-text-field>
             <v-btn type="submit" color="black" class="login-btn">Log in</v-btn>
         </v-form>
-    </div>
-
-    <template>
         <div class="text-center">
             <v-snackbar v-model="snackbar" :timeout="timeout">
                 Thank You,You are logged in
@@ -29,7 +26,7 @@
                 </template>
             </v-snackbar>
         </div>
-    </template>
+    </div>
 
 </template>
 
@@ -49,7 +46,7 @@ const router = useRouter()
 const { isLoggedIn, user } = storeToRefs(authStore)
 const { login } = useAuthStore()
 const snackbar = ref(false)
-const timeout = ref(2000)
+const timeout = ref(1000)
 const onSubmit = async () => {
     if (!loginFormRef.value) return
     //@ts-ignore
@@ -60,7 +57,11 @@ const onSubmit = async () => {
     login(loginForm.value.email, loginForm.value.password)
     if (isLoggedIn.value == true) {
         router.push('/')
-        snackbar.value=true
+        snackbar.value = true
+        setTimeout(() => {
+            emits('close-login')
+        }, 1100);
+
     }
 }
 </script>
