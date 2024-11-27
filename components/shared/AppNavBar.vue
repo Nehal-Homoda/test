@@ -66,8 +66,7 @@
         <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" class="" />
       </Transition>
 
-     
-
+    
 
     </v-container>
   </v-sheet>
