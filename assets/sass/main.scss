@@ -15,7 +15,9 @@
     font-family: 'Cairo', sans-serif !important;
 }
 
-
+// .v-field{
+//     border-radius: 0 !important;
+// }
 /* Global styles */
 // html[dir="rtl"] {
 //     font-family: 'Cairo', sans-serif !important;
@@ -74,13 +76,13 @@
     background-color: #fff !important;
 }
 
-.v-field {
-    border-radius: 8px !important;
-}
+// .v-field {
+//     border-radius: 8px !important;
+// }
 
 
 .v-field {
-    border-radius: 8px !important;
+    border-radius: 0px !important;
 
 
     ::placeholder {

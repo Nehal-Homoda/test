@@ -7,14 +7,14 @@
             </v-btn>
         </div>
         <v-form ref="loginFormRef" @submit.prevent="onSubmit">
-            <input autocomplete="on" type="email" class=" dummy-input" id="email">
+            <input  autocomplete="on" type="email" class=" dummy-input" id="email" name="email"placeholder="Username or email address">
             <input autocomplete="on" type="password" class="dummy-input">
-            <v-text-field v-model="loginForm.email" variant="outlined" placeholder="Username or email address"
-                type="email" id="email"></v-text-field>
-            <v-text-field v-model="loginForm.password" variant="outlined" placeholder="password"
+            <v-text-field  v-model="loginForm.email" variant="outlined"
+                placeholder="Username or email address" type="email"></v-text-field>
+            <v-text-field  v-model="loginForm.password" variant="outlined" placeholder="password"
                 type="password"></v-text-field>
-            <v-btn type="submit" class="login-btn">
-                <span>Log in</span></v-btn>
+            <button ref="loginBtn" type="submit" class="login-btn">
+                <span>Log in</span></button>
         </v-form>
         <div class="text-center">
             <v-snackbar v-model="snackbar" :timeout="timeout">
@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+const showFocusClass = ref(false)
 const loginForm = ref({
     email: '',
     password: ''
@@ -41,6 +42,7 @@ const emits = defineEmits(['close-login'])
 const handleCloseLoginForm = () => {
     emits('close-login')
 }
+const loginBtn = ref<HTMLButtonElement | null>(null)
 const loginFormRef = ref(null)
 const authStore = useAuthStore()
 const router = useRouter()
@@ -65,6 +67,14 @@ const onSubmit = async () => {
 
     }
 }
+
+onMounted(() => {
+
+
+    loginBtn.value?.focus()
+
+})
+
 </script>
 
 <style scoped lang="scss">
@@ -78,15 +88,27 @@ const onSubmit = async () => {
     z-index: 999;
     // animation: slideRight 0.5 ease-in-out;
 
-
+.dummy-input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
     .login-btn {
         width: 100%;
-        background-color: black;
-        animation: backgroundfade 2s ease-in-out;
+        background-color: gold;
+        transition: all 1s ease-in-out;
+        // animation: backgroundfade 2s ease-in-out;
 
         span {
             color: white;
         }
+
+        &:hover,
+        &:focus {
+            background-color: black;
+        }
+
+
 
     }
 
@@ -100,14 +122,13 @@ const onSubmit = async () => {
 
 }
 
-@keyframes backgroundfade {
-    0% {
-        background-color: gold;
+// @keyframes backgroundfade {
+//     0% {
+//         background-color: gold;
 
-    }
+//     }
 
-    100% {
-        background-color: #000;
-    }
-}
-</style>
+//     100% {
+//         background-color: #000;
+//     }
+// }</style>

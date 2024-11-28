@@ -6,19 +6,19 @@
                     <div class="login-form">
                         <v-form ref="loginFormRef" class="" @submit.prevent="onSubmit"
                             :class="{ 'shake-form': isNotValid }">
-                            <!-- <input autocomplete="on" type="email" class=" dummy-input" id="email">
-                            <input autocomplete="on" type="password" class="dummy-input"> -->
+                            <input autocomplete="on" type="email" class=" dummy-input" id="email">
+                            <input autocomplete="on" type="password" class="dummy-input">
                             <v-card rounded="lg" variant="outlined" color="deep-orange-lighten-3" class="px-10 py-13">
                                 <v-row>
                                     <v-col cols="12" md="7" class="mx-auto">
 
                                         <label for="email"></label>
                                         <v-text-field v-model="loginForm.email" :rules="[validationRules.required]"
-                                            variant="outlined" type="email" id="email"></v-text-field>
+                                            variant="outlined" type="email" ></v-text-field>
                                         <label for="password"></label>
                                         <v-text-field v-model="loginForm.password" :rules="[validationRules.required]"
                                             variant="outlined" color="deep-orange-lighten-3" type="password"
-                                            id="password"></v-text-field>
+                                            ></v-text-field>
                                         <div class="d-flex justify-center">
 
                                         </div>
