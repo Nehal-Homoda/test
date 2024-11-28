@@ -1,33 +1,40 @@
 <template>
-    <div class="login-form px-5 py-10">
-        <div class="d-flex justify-space-between mb-8">
-            <h3>LOGIN</h3>
-            <v-btn class="close-btn" @click="handleCloseLoginForm" density="compact" icon="" variant="text">
-                <v-icon color="grey">mdi mdi-close</v-icon>
-            </v-btn>
-        </div>
-        <v-form ref="loginFormRef" @submit.prevent="onSubmit">
-            <input  autocomplete="on" type="email" class=" dummy-input" id="email" name="email"placeholder="Username or email address">
-            <input autocomplete="on" type="password" class="dummy-input">
-            <v-text-field  v-model="loginForm.email" variant="outlined"
-                placeholder="Username or email address" type="email"></v-text-field>
-            <v-text-field  v-model="loginForm.password" variant="outlined" placeholder="password"
-                type="password"></v-text-field>
-            <button ref="loginBtn" type="submit" class="login-btn">
-                <span>Log in</span></button>
-        </v-form>
-        <div class="text-center">
-            <v-snackbar v-model="snackbar" :timeout="timeout">
-                Thank You,You are logged in
+    <Transition name="slideRight">
+        <div v-if="showLoginTransition" class="login-form px-5 py-10">
+            <div class="d-flex justify-space-between mb-8">
+                <h3>LOGIN</h3>
+                <v-btn class="close-btn" @click="handleCloseLoginForm" density="compact" icon="" variant="text">
+                    <v-icon color="grey">mdi mdi-close</v-icon>
+                </v-btn>
+            </div>
+            <v-form ref="loginFormRef" @submit.prevent="onSubmit">
+                <input autocomplete="on" type="email" class=" dummy-input" id="email" name="email"
+                    placeholder="Username or email address">
+                <input autocomplete="on" type="password" class="dummy-input">
+                <v-text-field v-model="loginForm.email" variant="outlined" placeholder="Username or email address"
+                    type="email"></v-text-field>
+                <v-text-field v-model="loginForm.password" variant="outlined" placeholder="password"
+                    type="password"></v-text-field>
+                <button ref="loginBtn" type="submit" class="login-btn">
+                    <span>Log in</span></button>
+            </v-form>
+            <div class="text-center">
+                <v-snackbar v-model="snackbar" :timeout="timeout">
+                    Thank You,You are logged in
 
-                <template v-slot:actions>
-                    <v-btn color="blue" variant="text" @click="snackbar = false">
-                        Close
-                    </v-btn>
-                </template>
-            </v-snackbar>
+                    <template v-slot:actions>
+                        <v-btn color="blue" variant="text" @click="snackbar = false">
+                            Close
+                        </v-btn>
+                    </template>
+                </v-snackbar>
+            </div>
         </div>
-    </div>
+    </Transition>
+    <Transition name="fade">
+        <div @click="handleCloseLoginForm" v-if="showOverlayTransition" class="overlay">
+        </div>
+    </Transition>
 
 </template>
 
@@ -37,10 +44,18 @@ const loginForm = ref({
     email: '',
     password: ''
 })
+const showLoginTransition = ref(false)
+const showOverlayTransition = ref(false)
+
 const emits = defineEmits(['close-login'])
 
 const handleCloseLoginForm = () => {
-    emits('close-login')
+    showLoginTransition.value = false
+    showOverlayTransition.value = false
+    setTimeout(() => {
+        emits('close-login')
+
+    }, 500);
 }
 const loginBtn = ref<HTMLButtonElement | null>(null)
 const loginFormRef = ref(null)
@@ -70,8 +85,13 @@ const onSubmit = async () => {
 
 onMounted(() => {
 
-
-    loginBtn.value?.focus()
+    showLoginTransition.value = true
+    showOverlayTransition.value = true
+    nextTick(()=>{
+        console.log(loginBtn.value)
+        loginBtn.value?.focus()
+        
+    })
 
 })
 
@@ -88,11 +108,12 @@ onMounted(() => {
     z-index: 999;
     // animation: slideRight 0.5 ease-in-out;
 
-.dummy-input{
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+    .dummy-input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
     .login-btn {
         width: 100%;
         background-color: gold;
@@ -120,6 +141,16 @@ onMounted(() => {
 
     }
 
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.144);
+    z-index: 998;
 }
 
 // @keyframes backgroundfade {

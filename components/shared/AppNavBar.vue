@@ -62,9 +62,7 @@
 
 
       </div>
-      <Transition name="slideRight">
         <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" class="" />
-      </Transition>
 
     
 
@@ -247,6 +245,7 @@ const links = ref({
         box-shadow: 5px 5px 30px #00000013;
         padding: 20px 20px;
         color: black;
+        background-color: white;
         // transition: all 0.3s ease-in-out;
         z-index: 99;
         animation: slideUpMenu 300ms ease-in-out;

@@ -14,9 +14,7 @@ const closeNavDrawer = () => {
   <v-app>
     <v-main>
       <SharedAppNavBar @open-drawer="openNavDrawer" />
-      <Transition name="slideLeft">
         <SharedAppNavDrawer @close-drawer="closeNavDrawer" v-if="showDrawer" />
-      </Transition>
       <slot />
     </v-main>
   </v-app>

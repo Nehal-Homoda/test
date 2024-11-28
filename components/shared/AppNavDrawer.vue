@@ -1,101 +1,118 @@
 <template>
-    <div class="nav-drawer d-md-none d-block">
-        <div class="close-btn-wrap pt-3 pe-2 d-flex justify-end">
-            <v-btn class="close-btn" @click="handleCloseDrawer" variant="text" icon="" density="compact">
-                <v-icon color="grey-darken-1" size="30">mdi mdi-close</v-icon>
-            </v-btn>
-        </div>
-        <div class="px-6">
-            <v-divider></v-divider>
-        </div>
-        <div class="drawer-content">
-            <div class="link-wrapper">
-                <template v-for="(item, index) in links">
-                    <NuxtLink @click="handleSelectedItem(item)" class="link py-3 px-6 d-flex justify-space-between ">{{
-                        item.name }}
-                        <v-icon>mdi mdi-chevron-right</v-icon>
-                    </NuxtLink>
-                    <div class="px-6">
-                        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
-                    </div>
-                </template>
+    <Transition name="slideLeft">
+
+        <div v-if="showDrawerTransition" class="nav-drawer d-md-none d-block">
+            <div class="close-btn-wrap pt-3 pe-2 d-flex justify-end">
+                <v-btn class="close-btn" @click="handleCloseDrawer" variant="text" icon="" density="compact">
+                    <v-icon color="grey-darken-1" size="30">mdi mdi-close</v-icon>
+                </v-btn>
             </div>
-
-
-            <div class="items-link" v-if="selectedCategory">
-                <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
-                        mdi-chevron-left</v-icon> {{
-                            selectedCategory.name }}
-                </NuxtLink>
-
-                <div class="px-6">
-                    <v-divider></v-divider>
+            <div class="px-6">
+                <v-divider></v-divider>
+            </div>
+            <div class="drawer-content">
+                <div class="link-wrapper">
+                    <template v-for="(item, index) in links">
+                        <NuxtLink @click="handleSelectedItem(item)"
+                            class="link py-3 px-6 d-flex justify-space-between ">{{
+                                item.name }}
+                            <v-icon>mdi mdi-chevron-right</v-icon>
+                        </NuxtLink>
+                        <div class="px-6">
+                            <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        </div>
+                    </template>
                 </div>
-                <template v-for="(item, index) in selectedCategory.categories">
-                    <NuxtLink @click="handleSelectedItem(item)" class="link py-3 px-6 d-flex justify-space-between ">
-                        {{ item.name }}
-                        <v-icon>mdi mdi-chevron-right</v-icon>
+
+
+                <div class="items-link" v-if="selectedCategory">
+                    <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
+                            mdi-chevron-left</v-icon> {{
+                                selectedCategory.name }}
                     </NuxtLink>
+
                     <div class="px-6">
-                        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        <v-divider></v-divider>
                     </div>
-                </template>
-            </div>
-            <div class="items-link" v-if="selectedItem">
-
-                <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
-                        mdi-chevron-left</v-icon> {{
-                            selectedItem.name }}
-                </NuxtLink>
-
-                <div class="px-6">
-                    <v-divider></v-divider>
+                    <template v-for="(item, index) in selectedCategory.categories">
+                        <NuxtLink @click="handleSelectedItem(item)"
+                            class="link py-3 px-6 d-flex justify-space-between ">
+                            {{ item.name }}
+                            <v-icon>mdi mdi-chevron-right</v-icon>
+                        </NuxtLink>
+                        <div class="px-6">
+                            <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        </div>
+                    </template>
                 </div>
-                <template v-for="(item, index) in selectedItem.items">
-                    <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
-                        }}
+                <div class="items-link" v-if="selectedItem">
 
+                    <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
+                            mdi-chevron-left</v-icon> {{
+                                selectedItem.name }}
                     </NuxtLink>
+
                     <div class="px-6">
-                        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        <v-divider></v-divider>
                     </div>
-                </template>
-            </div>
+                    <template v-for="(item, index) in selectedItem.items">
+                        <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
+                            }}
 
+                        </NuxtLink>
+                        <div class="px-6">
+                            <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        </div>
 
-            <!-- <div class="items-link" v-if="selectedCategoryItem">
+                    </template>
+                </div>
 
-                <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
+                <!-- <div class="items-link" v-if="selectedCategoryItem">
+                    
+                    <NuxtLink @click="hideItems" class="link py-3 px-3 d-flex align-center"><v-icon>mdi
                         mdi-chevron-left</v-icon> {{
                             selectedCategoryItem.name }}
-                </NuxtLink>
-
-                <div class="px-6">
-                    <v-divider></v-divider>
-                </div>
-                <template v-for="(item, index) in selectedCategoryItem.items">
-                    <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
-                        }}
-
-                    </NuxtLink>
+                        </NuxtLink>
+    
                     <div class="px-6">
-                        <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        <v-divider></v-divider>
                     </div>
-                </template>
-            </div> -->
+                    <template v-for="(item, index) in selectedCategoryItem.items">
+                        <NuxtLink class="link py-3 px-6" :to="item.link">{{ item.name
+                            }}
+    
+                        </NuxtLink>
+                        <div class="px-6">
+                            <v-divider class="" :class="index == 5 ? 'd-none' : 'd-block'"></v-divider>
+                        </div>
+                    </template>
+                </div> -->
+            </div>
+
         </div>
+    </Transition>
+    <Transition name="fade">
 
+        <div v-if="showOverlayTransition" @click="handleCloseDrawer" class="overlay">
 
+        </div>
+    </Transition>
 
-    </div>
 </template>
 
 <script setup lang="ts">
 import RoutesManager from '~/core/manager/RoutesManager';
 const emits = defineEmits(['close-drawer'])
 const handleCloseDrawer = () => {
-    emits('close-drawer')
+    showDrawerTransition.value=false
+    showOverlayTransition.value=false
+    setTimeout(() => {
+        emits('close-drawer')
+        
+    }, 500);
 }
+const showDrawerTransition=ref(false)
+const showOverlayTransition=ref(false)
 type listItem = {
     name: '',
     link: '',
@@ -234,7 +251,10 @@ const hideItems = () => {
     selectedCategory.value = null
 }
 
-
+onMounted(()=>{
+    showDrawerTransition.value=true
+    showOverlayTransition.value=true
+})
 
 </script>
 
@@ -245,7 +265,9 @@ const hideItems = () => {
     width: 300px;
     height: 100vh;
     background-color: white;
-    animation: slideLeft 0.5s ease-in-out;
+    // animation: slideLeft 0.5s ease-in-out;
+    z-index: 999;
+    overflow: hidden;
 
     .close-btn-wrap {
         height: 80px;
@@ -291,5 +313,15 @@ const hideItems = () => {
         }
     }
 
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 998;
+    background-color: rgba(0, 0, 0, 0.096);
 }
 </style>

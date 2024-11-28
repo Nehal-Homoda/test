@@ -4,11 +4,11 @@
     }
 }
 
-@keyframes slideLeft {
-    from {
-        transform: translateX(-100%)
-    }
-}
+// @keyframes slideLeft {
+//     from {
+//         transform: translateX(-100%)
+//     }
+// }
 
 @keyframes slideRight {
     from {
@@ -58,7 +58,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 300ms ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 
 /*==| SLIDE LEFT |==*/
@@ -69,7 +69,7 @@
 
 .slideLeft-enter-active,
 .slideLeft-leave-active {
-    transition: all 300ms ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 
 /*==| SLIDE RIGHT |==*/
@@ -80,7 +80,7 @@
 
 .slideRight-enter-active,
 .slideRight-leave-active {
-    transition: all 300ms ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 
 /*==| SLIDE UP |==*/
