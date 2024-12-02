@@ -17,6 +17,13 @@
                     type="password"></v-text-field>
                 <button ref="loginBtn" type="submit" class="login-btn">
                     <span>Log in</span></button>
+                <div class="text-center mt-10">
+                    <span class="register-title mx-2">Not a member ? </span>
+                    <button @click="handleRegister" color="black" variant="text" density="compact" class="register-btn">
+                        <span class="btn-name">Register</span>
+                    </button>
+                </div>
+
             </v-form>
             <div class="text-center">
                 <v-snackbar v-model="snackbar" :timeout="timeout">
@@ -47,15 +54,17 @@ const loginForm = ref({
 const showLoginTransition = ref(false)
 const showOverlayTransition = ref(false)
 
-const emits = defineEmits(['close-login'])
+const emits = defineEmits(['close-login', 'open-register'])
 
 const handleCloseLoginForm = () => {
     showLoginTransition.value = false
     showOverlayTransition.value = false
     setTimeout(() => {
         emits('close-login')
-
     }, 500);
+}
+const handleRegister = () => {
+    emits('open-register')
 }
 const loginBtn = ref<HTMLButtonElement | null>(null)
 const loginFormRef = ref(null)
@@ -87,10 +96,11 @@ onMounted(() => {
 
     showLoginTransition.value = true
     showOverlayTransition.value = true
-    nextTick(()=>{
+
+    nextTick(() => {
         console.log(loginBtn.value)
         loginBtn.value?.focus()
-        
+
     })
 
 })
@@ -139,6 +149,38 @@ onMounted(() => {
             transform: rotate(90deg);
         }
 
+    }
+
+    .register-btn {
+
+
+
+        .btn-name {
+            position: relative;
+
+            &:hover {
+                color: gold;
+                transition: all 0.4s ease-in-out;
+            }
+
+            &::before {
+                width: 100%;
+                height: 1px;
+                background-color: black;
+                position: absolute;
+                content: '';
+                top: 30px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+
+            }
+        }
+
+    }
+
+    .register-title {
+        color: grey;
     }
 
 }

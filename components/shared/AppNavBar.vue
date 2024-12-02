@@ -59,16 +59,14 @@
           </v-btn>
 
         </div>
-
-
       </div>
-        <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" class="" />
+      <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" @open-register="showRegisterForm" class="" />
+      <UserAuthRegister v-if="showRegister" @close-login="closeForm()" class="" />
 
-    
 
     </v-container>
   </v-sheet>
- 
+
 </template>
 
 <script setup lang="ts">
@@ -79,6 +77,7 @@ const isLoggedIn = ref(false)
 
 const router = useRouter()
 const showLoginForm = ref(false)
+const showRegister=ref(false)
 
 // const login = () => {
 //   router.push(RoutesManager.userLogin)
@@ -91,6 +90,10 @@ const handleOpenDrawer = () => {
 }
 const closeForm = () => {
   showLoginForm.value = false
+}
+const showRegisterForm=()=>{
+  showLoginForm.value=false
+  showRegister.value=true
 }
 
 

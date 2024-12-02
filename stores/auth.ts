@@ -18,6 +18,12 @@ export const useAuthStore = defineStore('auth', () => {
         }
 
     }
+    const SET_TOKEN=()=>{
+
+    }
+   const DESTROY_TOKEN=()=>{
+    
+   }
 
     return {
         isLoggedIn,
