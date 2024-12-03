@@ -2,7 +2,7 @@
     <div class="register-form py-10 px-5">
         <div class="d-flex justify-space-between mb-10">
             <h3>Register</h3>
-            <v-btn class="close-btn" icon="" density="compact" variant="text">
+            <v-btn @click="handleRegisterClose" class="close-btn" icon="" density="compact" variant="text">
                 <v-icon color="grey">mdi mdi-close</v-icon>
             </v-btn>
         </div>
@@ -25,7 +25,10 @@
 </template>
 
 <script setup lang="ts">
-
+const emits=defineEmits(['close-register'])
+const handleRegisterClose=()=>{
+emits('close-register')
+}
 </script>
 
 <style scoped lang="scss">

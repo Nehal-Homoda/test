@@ -61,7 +61,7 @@
         </div>
       </div>
       <UserAuthLogin v-if="showLoginForm" @close-login="closeForm()" @open-register="showRegisterForm" class="" />
-      <UserAuthRegister v-if="showRegister" @close-login="closeForm()" class="" />
+      <!-- <UserAuthRegister v-if="showRegister" @close-register="closeForm()" class="" /> -->
 
 
     </v-container>
@@ -90,6 +90,7 @@ const handleOpenDrawer = () => {
 }
 const closeForm = () => {
   showLoginForm.value = false
+  showRegister.value=false
 }
 const showRegisterForm=()=>{
   showLoginForm.value=false
